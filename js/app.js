@@ -82,13 +82,24 @@
         for (i = 0; i < 3; i++)
           this.questions.push(util.getQuestion());
 
-        console.log(this.questions);
+
       },
       ready: function() {
         console.log('Ready');
         this.update();
         this.nowSecond = this.maxSecond;
         this.sTime = Date.now();
+
+        // toggle keyboard class
+        var keyboards = document.getElementsByClassName("keyboard-number");
+        for (var i = 0; i < keyboards.length; i++) {
+          keyboards[i].addEventListener('touchstart', function() {
+            this.classList.add('hover');
+          }, false);
+          keyboards[i].addEventListener('touchend', function() {
+            this.classList.remove('hover');
+          }, false);
+        }
       },
       methods: {
         clickKeyboard: function(key) {
@@ -158,6 +169,8 @@
           this.pause();
         },
         clickHome: function() {
+          this.eTime = Date.now();
+          var useTime = this.eTime - this.sTime;
           this.save();
           router.go('index');
         },
@@ -335,17 +348,10 @@
     // run app
     router.start(App, '#app');
 
-    // toggle keyboard class
-    var keyboards = document.getElementsByClassName("keyboard-number");
-    for (var i = 0; i < keyboards.length; i++) {
-      keyboards[i].addEventListener('touchstart', function() {
-        this.classList.add('hover');
-      }, false);
-      keyboards[i].addEventListener('touchend', function() {
-        this.classList.remove('hover');
-      }, false);
-    }
 
+    // document.addEventListener('touchstart', function(){
+    //     alert('hello');
+    // }, false);
   }
 
 })(window);
