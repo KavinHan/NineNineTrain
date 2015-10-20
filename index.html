@@ -2,7 +2,7 @@
 <html>
 
 <head>
-   <meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+  <meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
   <meta name="format-detection" content="telephone=no">
   <meta name="msapplication-tap-highlight" content="no">
   <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
@@ -25,10 +25,11 @@
       </div>
     </div>
   </script>
+
   <script type="text/x-template" id="play-template">
-    <div class="row t-a-c b-b-gray">
+    <div class="row t-a-c b-b-gray b-t-gray">
       <span class="cell-10 header-num b-r-gray back-btn center">
-        <img v-link="'index'" src="img/back.svg" alt="" />
+        <img src="img/back.svg" alt="" v-on="click: clickBack()"/>
       </span>
       <span class="cell-30 header-num b-r-gray">
         <span class="header-name">Timer:</span>{{nowSecond}}</span>
@@ -82,7 +83,7 @@
     </div>
 
     <div class="center play-modal" v-show="bGameOver">
-      <div class="modal-wrap">
+      <div class="modal-wrap modal-over">
         <p>Score: {{score}}</p>
         <p>Play Time: {{eTime-sTime | HHMMDD}}</p>
         <p>Max Combo: {{maxCombo}}</p>
@@ -93,7 +94,19 @@
         </div>
       </div>
     </div>
+
+    <div class="center play-modal" v-show="bConfirm">
+      <div class="modal-wrap modal-confirm">
+        <p> Do you want exit? </p>
+        <div class="row t-a-c">
+          <span class="cell-50" v-on="click: clickHome()">Home</span>
+          <span class="cell-50" v-on="click: clickCancle()">Cancle</span>
+        </div>
+      </div>
+    </div>
+
   </script>
+
   <script type="text/x-template" id="rank-template">
     <div class="row t-a-c b-b-gray rank-header">
       <span class="cell-20 b-r-gray" v-link="'index'">Back</span>

@@ -71,11 +71,16 @@ html, body {
   background-color: rgba(0, 0, 0, .5);
 }
 .modal-wrap {
-  width: 300px;
   padding: 20px 30px;
   background-color: #fff;
   border-radius: 2px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+}
+.modal-over {
+  width: 300px;
+}
+.modal-confirm {
+  width: 250px;
 }
 
 /* rank style */

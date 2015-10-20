@@ -64,7 +64,7 @@
           answer: '',
           questions: [],
           timer: null,
-          maxSecond: 10,
+          maxSecond: 10000,
           nowSecond: 10,
           combo: 0,
           score: 0,
@@ -72,6 +72,7 @@
           sTime: 0,
           eTime: 0,
           bGameOver: false,
+          bConfirm: false,
           maxCombo: 0
         };
       },
@@ -152,6 +153,17 @@
             this.gameOver();
           }
         },
+        clickBack: function() {
+          this.bConfirm = true;
+          this.pause();
+        },
+        clickHome: function() {
+          router.go('index');
+        },
+        clickCancle: function() {
+          this.bConfirm = false;
+          this.start();
+        },
         gameOver: function() {
           console.log(this.timer);
           this.eTime = Date.now();
@@ -159,6 +171,12 @@
           console.log(useTime);
           this.bGameOver = true;
           this.save();
+        },
+        pause: function() {
+          if (this.timer) clearTimeout(this.timer);
+        },
+        start: function() {
+          this.timer = setTimeout(this.update, 1000);
         },
         reStart: function() {
           // reset problem
@@ -225,7 +243,6 @@
         }
       }
     });
-
 
     // rank page
     var rankPage = Vue.extend({
