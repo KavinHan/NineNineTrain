@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/app.css">
+  <title>Nine Nine Train</title>
+</head>
+
+<body>
+  <div id="app">
+    <router-view></router-view>
+  </div>
+
+  <script type="text/x-template" id="home-template">
+    <div class="center home-wrap">
+      <div class="">
+        <span class="home-btn" v-link="'play'">Play</span>
+        <span class="home-btn m-t-1" v-link="'rank'">Rank</span>
+      </div>
+    </div>
+  </script>
+  <script type="text/x-template" id="play-template">
+    <div class="row t-a-c b-b-gray">
+      <span class="cell-10 header-num b-r-gray back-btn center">
+        <img v-link="'index'" src="img/back.svg" alt="" />
+      </span>
+      <span class="cell-30 header-num b-r-gray">
+        <span class="header-name">Timer:</span>{{nowSecond}}</span>
+      <span class="cell-30 header-num b-r-gray">
+        <span class="header-name">Max Combo:</span>{{maxCombo}}</span>
+      <span class="cell-30 header-num b-r-gray">
+        <span class="header-name">Score:</span>{{score}}</span>
+    </div>
+
+    <div class="row t-a-c play-quest-num">
+      <span class="cell-20">{{questions[0][0]}}</span>
+      <span class="cell-15">{{questions[0][1] | symbol}}</span>
+      <span class="cell-20">{{questions[0][2]}}</span>
+      <span class="cell-15">=</span>
+      <span class="cell-30">{{answer}}</span>
+    </div>
+
+    <div class="row t-a-c play-quest-num">
+      <span class="cell-20">{{questions[1][0]}}</span>
+      <span class="cell-15">{{questions[1][1] | symbol}}</span>
+      <span class="cell-20">{{questions[1][2]}}</span>
+    </div>
+
+    <div class="row t-a-c play-quest-num">
+      <span class="cell-20">{{questions[2][0]}}</span>
+      <span class="cell-15">{{questions[2][1] | symbol}}</span>
+      <span class="cell-20">{{questions[2][2]}}</span>
+    </div>
+
+    <div class="row keyboard t-a-c">
+      <div class="row cell-100 b-t-gray">
+        <span class="cell-33 keyboard-number b-r-gray" v-on="click: clickKeyboard(1)">1</span>
+        <span class="cell-33 keyboard-number b-r-gray" v-on="click: clickKeyboard(2)">2</span>
+        <span class="cell-33 keyboard-number b-r-gray" v-on="click: clickKeyboard(3)">3</span>
+      </div>
+      <div class="row cell-100 b-t-gray">
+        <span class="cell-33 keyboard-number b-r-gray" v-on="click: clickKeyboard(4)">4</span>
+        <span class="cell-33 keyboard-number b-r-gray" v-on="click: clickKeyboard(5)">5</span>
+        <span class="cell-33 keyboard-number b-r-gray" v-on="click: clickKeyboard(6)">6</span>
+      </div>
+      <div class="row cell-100 b-t-gray">
+        <span class="cell-33 keyboard-number b-r-gray" v-on="click: clickKeyboard(7)">7</span>
+        <span class="cell-33 keyboard-number b-r-gray" v-on="click: clickKeyboard(8)">8</span>
+        <span class="cell-33 keyboard-number b-r-gray" v-on="click: clickKeyboard(9)">9</span>
+      </div>
+      <div class="row cell-100 b-t-gray">
+        <span class="cell-33 keyboard-number b-r-gray" v-on="click: clickKeyboard(11)">Clear</span>
+        <span class="cell-33 keyboard-number b-r-gray" v-on="click: clickKeyboard(0)">0</span>
+        <span class="cell-33 keyboard-number b-r-gray" v-on="click: clickKeyboard(10)">Enter</span>
+      </div>
+    </div>
+
+    <div class="center play-modal" v-show="bGameOver">
+      <div class="modal-wrap">
+        <p>Score: {{score}}</p>
+        <p>Play Time: {{eTime-sTime | HHMMDD}}</p>
+        <p>Max Combo: {{maxCombo}}</p>
+        <p>Question Count: {{count}}</p>
+        <div class="row t-a-c">
+          <span class="cell-50" v-on="click: reStart()">Again</span>
+          <span class="cell-50" v-link="'/'">Home</span>
+        </div>
+      </div>
+    </div>
+  </script>
+  <script type="text/x-template" id="rank-template">
+    <div class="row t-a-c b-b-gray rank-header">
+      <span class="cell-20 b-r-gray" v-link="'index'">Back</span>
+      <span class="cell-40" v-on="click: showLocal()">Local</span>
+      <span class="cell-40" v-on="click: showGlobe()">Globle</span>
+    </div>
+    <div class="rank-wrap t-a-c">
+      <div class="row b-b-gray">
+        <span class="cell-10 b-r-gray"></span>
+        <span class="cell-30 b-r-gray">play count</span>
+        <span class="cell-30 b-r-gray">play time</span>
+        <span class="cell-15 b-r-gray">combo</span>
+        <span class="cell-15">score</span>
+      </div>
+      <div class="row b-b-gray" v-repeat="item: itemArr" v-show="itemArr.length" v-on="touchleave: test()">
+        <span class="cell-10 b-r-gray">{{$index+1}}</span>
+        <span class="cell-30 b-r-gray">{{item.playCount}}</span>
+        <span class="cell-30 b-r-gray">{{item.playTime | HHMMDD}}</span>
+        <span class="cell-15 b-r-gray">{{item.maxCombo}}</span>
+        <span class="cell-15">{{item.score}}</span>
+      </div>
+      <div class="row b-b-gray t-a-c" v-show="bShowMsg">
+        {{loadingMsg}}
+      </div>
+    </div>
+  </script>
+
+  <script type="text/javascript" src="cordova.js"></script>
+
+  <script src="js/av-core-mini-0.6.1.js"></script>co
+  <script src="js/fastclick.js" charset="utf-8"></script>
+  <script src="js/vue.js" charset="utf-8"></script>
+  <script src="js/vue-router.js" charset="utf-8"></script>
+  <script src="js/store.js" charset="utf-8"></script>
+  <script src="js/util.js" charset="utf-8"></script>
+  <script src="js/app.js" charset="utf-8"></script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+.m-t-1 {
+  margin-top: 1em;
+}
+.t-a-c {
+  text-align: center;
+}
+.b-t-gray {
+  border-top: 1px solid gray;
+}
+.b-r-gray {
+  border-right: 1px solid gray;
+}
+.b-b-gray {
+  border-bottom: 1px solid gray;
+}
+a {
+  color: black;
+}
+
+html, body,
+div, p,
+a, span,
+input {
+  box-sizing: border-box;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cell {
+  flex: 1;
+}
+.cell-10 { flex: 0 0 10% }
+.cell-15 { flex: 0 0 15% }
+.cell-20 { flex: 0 0 20% }
+.cell-30 { flex: 0 0 30% }
+.cell-33 { flex: 0 0 33.3333% }
+.cell-40 { flex: 0 0 40% }
+.cell-50 { flex: 0 0 50% }
+.cell-80 { flex: 0 0 80% }
+.cell-100 { flex: 0 0 100% }

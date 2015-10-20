@@ -1,0 +1,89 @@
+html, body {
+  height: 100%;
+  padding-top: 10px;
+  overflow: hidden;
+}
+
+#app {
+  height: 100%;
+}
+
+.back-btn img {
+  width: 24px;
+}
+/* home style */
+.home-wrap {
+  height: 100%;
+}
+
+.home-btn {
+  display: block;
+  width: 100px;
+  height: 50px;
+  line-height: 50px;
+  border: 1px solid red;
+  text-align: center;
+}
+
+
+/* play style */
+.keyboard {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+}
+
+.keyboard-number {
+  height: 60px;
+  line-height: 60px;
+}
+.keyboard .hover {
+  background-color: #ccc;
+}
+.header-num {
+  position: relative;
+  height: 40px;
+  line-height: 40px;
+  font-size: 22px;
+}
+.header-name {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  font-size: 10px;
+  height: 10px;
+  line-height: 10px;
+}
+.play-quest-num span {
+  line-height: 40px;
+  font-size: 150%;
+}
+
+.play-modal {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+}
+.modal-wrap {
+  width: 300px;
+  padding: 20px 30px;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+}
+
+/* rank style */
+.rank-header span {
+  height: 40px;
+  line-height: 40px;
+}
+.rank-wrap span {
+  height: 30px;
+  line-height: 30px;
+}
