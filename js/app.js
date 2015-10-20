@@ -64,7 +64,7 @@
           answer: '',
           questions: [],
           timer: null,
-          maxSecond: 10000,
+          maxSecond: 10,
           nowSecond: 10,
           combo: 0,
           score: 0,
@@ -158,6 +158,7 @@
           this.pause();
         },
         clickHome: function() {
+          this.save();
           router.go('index');
         },
         clickCancle: function() {
