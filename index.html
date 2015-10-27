@@ -108,30 +108,35 @@
   </script>
 
   <script type="text/x-template" id="rank-template">
-    <div class="row t-a-c b-b-gray rank-header b-t-gray">
-      <span class="cell-20 b-r-gray" v-link="'index'">Back</span>
-      <span class="cell-40" v-on="click: showLocal()">Local</span>
-      <span class="cell-40" v-on="click: showGlobe()">Globle</span>
-    </div>
-    <div class="rank-wrap t-a-c">
-      <div class="row b-b-gray">
+    <div class="row t-a-c rank-header">
+      <div class="row b-t-gray">
+        <span class="cell-20 b-r-gray" v-link="'index'">Back</span>
+        <span class="cell-40" v-on="click: showLocal()">Local</span>
+        <span class="cell-40" v-on="click: showGlobe()">Globle</span>
+      </div>
+      <div class="row b-t-gray b-b-gray">
         <span class="cell-10 b-r-gray"></span>
         <span class="cell-30 b-r-gray">play count</span>
         <span class="cell-30 b-r-gray">play time</span>
         <span class="cell-15 b-r-gray">combo</span>
         <span class="cell-15">score</span>
       </div>
-      <div class="row b-b-gray" v-repeat="item: itemArr" v-show="itemArr.length" v-on="touchleave: test()">
-        <span class="cell-10 b-r-gray">{{$index+1}}</span>
-        <span class="cell-30 b-r-gray">{{item.playCount}}</span>
-        <span class="cell-30 b-r-gray">{{item.playTime | HHMMDD}}</span>
-        <span class="cell-15 b-r-gray">{{item.maxCombo}}</span>
-        <span class="cell-15">{{item.score}}</span>
-      </div>
-      <div class="row b-b-gray t-a-c" v-show="bShowMsg">
-        {{loadingMsg}}
+    </div>
+    <div class="rank-wrap">
+      <div class="rank-content b-t-gray t-a-c">
+        <div class="row b-b-gray" v-repeat="item: itemArr" v-show="itemArr.length" v-on="touchleave: test()">
+          <span class="cell-10 b-r-gray">{{$index+1}}</span>
+          <span class="cell-30 b-r-gray">{{item.playCount}}</span>
+          <span class="cell-30 b-r-gray">{{item.playTime | HHMMDD}}</span>
+          <span class="cell-15 b-r-gray">{{item.maxCombo}}</span>
+          <span class="cell-15">{{item.score}}</span>
+        </div>
+        <div class="row b-b-gray t-a-c" v-show="bShowMsg">
+          {{loadingMsg}}
+        </div>
       </div>
     </div>
+
   </script>
 
   <script type="text/javascript" src="cordova.js"></script>

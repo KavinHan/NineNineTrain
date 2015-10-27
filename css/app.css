@@ -5,6 +5,7 @@ html, body {
 }
 
 #app {
+  position: relative;
   height: 100%;
 }
 
@@ -84,11 +85,24 @@ html, body {
 }
 
 /* rank style */
+.rank-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  background-color: white;
+}
 .rank-header span {
   height: 40px;
   line-height: 40px;
 }
-.rank-wrap span {
+.rank-wrap {
+  height: 100%;
+  padding-top: 82px;
+  overflow: auto;
+}
+.rank-content span {
   height: 30px;
   line-height: 30px;
 }

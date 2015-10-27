@@ -25,11 +25,13 @@ input {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
+  -webkit-overflow-scrolling: touch;
 }
 .row {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  width: 100%;
 }
 .center {
   display: flex;

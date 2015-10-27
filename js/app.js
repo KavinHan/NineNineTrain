@@ -10,7 +10,7 @@
     console.log("Start App!");
     console.log("LeanCloud ===> ");
     console.log(AV);
-    AV.initialize('', '');
+    AV.initialize('*', '*');
 
     FastClick.attach(document.body);
 
